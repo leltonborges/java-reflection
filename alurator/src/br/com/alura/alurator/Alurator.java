@@ -3,8 +3,6 @@ package br.com.alura.alurator;
 import br.com.alura.alurator.protocolo.Request;
 import br.com.alura.alurator.reflexao.Reflexao;
 
-import java.lang.reflect.InvocationTargetException;
-
 public class Alurator {
 
     private String pacoteBase;

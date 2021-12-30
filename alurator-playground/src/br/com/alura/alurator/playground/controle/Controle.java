@@ -21,4 +21,6 @@ public class Controle {
 	public List<String> getLista() {
 		return lista;
 	}
+
+	public void methodControle1(){}
 }

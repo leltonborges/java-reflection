@@ -10,4 +10,12 @@ public class SubControle extends Controle {
 
     private SubControle(String txt, Long id) {
     }
+
+    public void methodSubControle1(){
+        System.out.println("Executando método subControlle1");
+    }
+    private String methodSubControle2(){
+        System.out.println("Executando método subControlle2");
+        return "resutado do return methodSubControle2";
+    }
 }
