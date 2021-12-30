@@ -11,7 +11,7 @@ public class TesteInstanciaObjetoCorretamente {
 
         Class<?> subControleClass2 = Class.forName("br.com.alura.alurator.playground.controle.SubControle");
 
-        Class<?> controllerClass1 = Class.forName("br.com.alura.alurator.playground.controle.Controle");
+        Class<?> controlerClass1 = Class.forName("br.com.alura.alurator.playground.controle.Controle");
 
         System.out.println("SubControle");
         Constructor<SubControle> constructorSubControleDefault = subControleClass1.getConstructor();
