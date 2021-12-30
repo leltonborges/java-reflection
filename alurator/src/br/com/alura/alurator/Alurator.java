@@ -1,6 +1,7 @@
 package br.com.alura.alurator;
 
 import br.com.alura.alurator.protocolo.Request;
+import br.com.alura.alurator.reflexao.ManipuladorClasse;
 import br.com.alura.alurator.reflexao.Reflexao;
 
 public class Alurator {
@@ -12,14 +13,19 @@ public class Alurator {
     }
 
     public Object executa(String url) {
-        String nomeControle = new Request(url).getNomeControle();
+        Request request = new Request(url);
+        String nomeControle = request.getNomeControle();
+        String nameMethod = request.getNameMethod();
 
-        Object instanciaController = new Reflexao()
-                .refleteClasse(pacoteBase + nomeControle)
-                .getConstrutorPadrao()
-                .invocar();
+        ManipuladorClasse manipuladorClasse = new Reflexao()
+                .refleteClasse(pacoteBase + nomeControle);
 
-        System.out.println(instanciaController);
-        return null;
+        Object instanciaController = manipuladorClasse.getConstrutorPadrao().invocar();
+
+        Object result = manipuladorClasse
+                .getMethod(nameMethod)
+                .InvokeMethod(manipuladorClasse.newInstance().getInstance());
+        return result;
+
     }
 }
