@@ -1,2 +1,9 @@
 .settings/
 .idea/
+alurator-playground/bin/
+alurator-playground/out/
+alurator/bin/
+alurator/out/
+estoque-api/bin/
+estoque-api/out/
+
