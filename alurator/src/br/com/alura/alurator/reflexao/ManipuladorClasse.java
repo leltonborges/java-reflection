@@ -2,6 +2,9 @@ package br.com.alura.alurator.reflexao;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Stream;
 
 public class ManipuladorClasse {
 
@@ -11,9 +14,9 @@ public class ManipuladorClasse {
         this.nameClass = nameClass;
     }
 
-    public ManipuladorObjeto newInstance(){
+    public ManipuladorObjeto newInstance() {
         Object instance = getConstrutorPadrao().invocar();
-        return  new ManipuladorObjeto(instance);
+        return new ManipuladorObjeto(instance);
     }
 
     public ManipuladorConstrutor getConstrutorPadrao() {
@@ -26,22 +29,23 @@ public class ManipuladorClasse {
         }
     }
 
-    public ManipulateMethods getMethod(String nameMethod){
-        try {
-            Method method = this.nameClass.getDeclaredMethod(nameMethod);
-            return new ManipulateMethods(method);
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public ManipulateMethods getMethod(String nameMethod, Map<String, Object> params) {
 
-    public ManipulateMethods getMethod(String nameMethod, Object... typeParameters){
-        try {
-            Method method = this.nameClass.getDeclaredMethod(nameMethod);
-            return new ManipulateMethods(method, typeParameters);
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
+        Stream<Method> methods = Stream.of(this.nameClass.getDeclaredMethods());
+        Method selectedMethod = methods.filter(m ->
+                        m.getName().equals(nameMethod) &&
+                                m.getParameterCount() == params.values().size() &&
+                                Stream.of(m.getParameters()).allMatch(p -> {
+                                            return params.keySet().contains(p.getName()) &&
+                                                    params.get(p.getName()).getClass().equals(p.getType());
+                                        }
+                                )
+                )
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Method not found!"));
+
+        return new ManipulateMethods(nameMethod, selectedMethod, params);
+
     }
 
 }

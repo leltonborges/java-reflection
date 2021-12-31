@@ -2,23 +2,32 @@ package br.com.alura.alurator.reflexao;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 public class ManipulateMethods {
+    private String nameMethod;
     private Method method;
-    private Object[] typeParameters;
+    private Map<String, Object> params;
 
-    public ManipulateMethods(Method method, Object[] typeParameters) {
-        this(method);
-        this.typeParameters = typeParameters;
-    }
-
-    public ManipulateMethods(Method method) {
+    public ManipulateMethods(String nameMethod, Method method, Map<String, Object> params) {
+        this.nameMethod = nameMethod;
         this.method = method;
+        this.params = params;
     }
 
     public Object InvokeMethod(Object instance){
         try {
-            return method.invoke(instance);
+            List<Object> parameters = new ArrayList<>();
+            Stream.of(method.getParameters())
+                    .forEach(p ->
+                        parameters.add(params.get(p.getName()))
+                    );
+
+            return method.invoke(instance, parameters.toArray());
         } catch (IllegalAccessException e) {
             return new RuntimeException(e);
         } catch (InvocationTargetException e) {
@@ -26,13 +35,4 @@ public class ManipulateMethods {
         }
     }
 
-    public Object InvokeMethod(Object instance, Object... typeParameters){
-        try {
-            return method.invoke(instance, typeParameters);
-        } catch (IllegalAccessException e) {
-            return new RuntimeException(e);
-        } catch (InvocationTargetException e) {
-            return new RuntimeException("Erro no metodo! "+ e.getTargetException());
-        }
-    }
 }

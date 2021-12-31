@@ -4,6 +4,8 @@ import br.com.alura.alurator.protocolo.Request;
 import br.com.alura.alurator.reflexao.ManipuladorClasse;
 import br.com.alura.alurator.reflexao.Reflexao;
 
+import java.util.Map;
+
 public class Alurator {
 
     private String pacoteBase;
@@ -16,6 +18,7 @@ public class Alurator {
         Request request = new Request(url);
         String nomeControle = request.getNomeControle();
         String nameMethod = request.getNameMethod();
+        Map<String, Object> params = request.getParams();
 
         ManipuladorClasse manipuladorClasse = new Reflexao()
                 .refleteClasse(pacoteBase + nomeControle);
@@ -23,8 +26,8 @@ public class Alurator {
         Object instanciaController = manipuladorClasse.getConstrutorPadrao().invocar();
 
         Object result = manipuladorClasse
-                .getMethod(nameMethod)
-                .InvokeMethod(manipuladorClasse.newInstance().getInstance());
+                .getMethod(nameMethod, params)
+                .InvokeMethod(instanciaController);
         return result;
 
     }
