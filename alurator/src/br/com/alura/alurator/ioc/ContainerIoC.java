@@ -39,6 +39,24 @@ public class ContainerIoC {
     }
 
     public void registrar(Class<?> typeFont, Class<?> typeDistino) {
+        boolean compativel = verificaCompatibilidade(typeFont, typeDistino);
+        if(!compativel) throw new ClassCastException("Não é possivel resolver: "+ typeFont.getName() + " para: " + typeDistino.getName());
         mapTypes.put(typeFont, typeDistino);
+    }
+
+    private boolean verificaCompatibilidade(Class<?> typeFont, Class<?> typeDistino) {
+        /// Modelo antigo
+//        boolean compativel;
+//
+//        if(typeFont.isInterface()){
+//            compativel = Arrays.stream(typeDistino.getInterfaces()).anyMatch(p -> p.equals(typeFont));
+//        }else {
+//            compativel = typeDistino.getSuperclass().equals(typeFont)
+//                        || typeDistino.equals(typeFont);
+//        }
+//        return compativel;
+
+        //Usando API Reflection
+        return typeFont.isAssignableFrom(typeDistino);
     }
 }
