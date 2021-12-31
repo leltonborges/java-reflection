@@ -1,5 +1,6 @@
 package br.com.alura.estoque;
 
+import java.util.List;
 import java.util.Scanner;
 
 import br.com.alura.alurator.Alurator;

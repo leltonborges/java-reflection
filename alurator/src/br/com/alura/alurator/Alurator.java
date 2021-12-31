@@ -43,7 +43,7 @@ public class Alurator {
         return result;
     }
 
-    public void registra(Class<?> typeFont, Class<?> typeDistino) {
+    public <T, K extends T> void registra(Class<T> typeFont, Class<K> typeDistino) {
         containerIoC.registrar(typeFont, typeDistino);
     }
 }

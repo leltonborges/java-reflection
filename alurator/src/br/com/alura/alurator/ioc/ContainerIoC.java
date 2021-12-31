@@ -38,13 +38,13 @@ public class ContainerIoC {
         }
     }
 
-    public void registrar(Class<?> typeFont, Class<?> typeDistino) {
-        boolean compativel = verificaCompatibilidade(typeFont, typeDistino);
-        if(!compativel) throw new ClassCastException("Não é possivel resolver: "+ typeFont.getName() + " para: " + typeDistino.getName());
+    public <T, K extends T> void registrar(Class<T> typeFont, Class<K> typeDistino) {
+//        boolean compativel = verificaCompatibilidade(typeFont, typeDistino);
+//        if(!compativel) throw new ClassCastException("Não é possivel resolver: "+ typeFont.getName() + " para: " + typeDistino.getName());
         mapTypes.put(typeFont, typeDistino);
     }
 
-    private boolean verificaCompatibilidade(Class<?> typeFont, Class<?> typeDistino) {
+//    private boolean verificaCompatibilidade(Class<?> typeFont, Class<?> typeDistino) {
         /// Modelo antigo
 //        boolean compativel;
 //
@@ -57,6 +57,6 @@ public class ContainerIoC {
 //        return compativel;
 
         //Usando API Reflection
-        return typeFont.isAssignableFrom(typeDistino);
-    }
+//        return typeFont.isAssignableFrom(typeDistino);
+//    }
 }
