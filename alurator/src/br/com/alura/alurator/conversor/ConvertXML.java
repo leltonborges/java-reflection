@@ -1,5 +1,7 @@
 package br.com.alura.alurator.conversor;
 
+import br.com.alura.alurator.anotacao.NomeTagXML;
+
 import java.lang.reflect.Field;
 import java.util.Collection;
 
@@ -18,12 +20,22 @@ public class ConvertXML {
                 }
                 sb.append("</lista>");
             } else {
-                String nameClasse = objClass.getName();
+                NomeTagXML nomeTagXML = objClass.getDeclaredAnnotation(NomeTagXML.class);
+
+                String nameClasse =
+                        nomeTagXML == null ?
+                                objClass.getName() :
+                                nomeTagXML.name();
 
                 sb.append("<" + nameClasse + ">");
                 for (Field f : objClass.getDeclaredFields()) {
                     f.setAccessible(true);
-                    String nameField = f.getName();
+                    NomeTagXML fieldAnnotation = f.getAnnotation(NomeTagXML.class);
+                    String nameField =
+                            fieldAnnotation == null ?
+                                    f.getName() :
+                                    fieldAnnotation.name();
+
                     Object valueField = f.get(obj);
                     sb.append("<" + nameField + ">");
                     sb.append(valueField);

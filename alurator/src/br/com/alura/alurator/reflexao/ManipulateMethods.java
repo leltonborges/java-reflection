@@ -11,7 +11,6 @@ public class ManipulateMethods {
     private String nameMethod;
     private Method method;
     private Map<String, Object> params;
-    private Throwable ex;
 
     public ManipulateMethods(String nameMethod, Method method, Map<String, Object> params) {
         this.nameMethod = nameMethod;
@@ -26,7 +25,6 @@ public class ManipulateMethods {
                     .forEach(p ->
                         parameters.add(params.get(p.getName()))
                     );
-
             return method.invoke(instance, parameters.toArray());
         } catch (IllegalAccessException e) {
             return new RuntimeException(e);
@@ -35,10 +33,4 @@ public class ManipulateMethods {
         }
     }
 
-    public ManipulateMethods comTratamentoDeExcecao(String nameMethod, Throwable ex) {
-        System.err.println("Error method: " + nameMethod);
-        System.err.println("Message: " + ex.getMessage());
-        System.err.println("StackTrace: " + ex.getStackTrace());
-        return this;
-    }
 }

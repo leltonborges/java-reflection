@@ -1,6 +1,7 @@
 package br.com.alura.alurator.reflexao;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -18,13 +19,15 @@ public class ManipuladorClasse {
         return new ManipuladorObjeto(instance);
     }
 
-    public ManipuladorConstrutor getConstrutorPadrao() {
+    public ManipuladorObject getConstrutorPadrao() {
         try {
             Constructor<?> constructor = nameClass.getDeclaredConstructor();
-            return new ManipuladorConstrutor(constructor);
-        } catch (NoSuchMethodException e) {
+            return new ManipuladorObject(constructor.newInstance());
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw  new RuntimeException("Erro no construtor! "+ e.getTargetException());
         }
     }
 

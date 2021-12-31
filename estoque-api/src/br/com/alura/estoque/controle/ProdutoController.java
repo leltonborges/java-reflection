@@ -10,8 +10,8 @@ public class ProdutoController {
 	
 	private ProdutoDaoMock produtoDao;
 
-	public ProdutoController() {
-		produtoDao = new ProdutoDaoMock();
+	public ProdutoController(ProdutoDaoMock produtoDaoMock) {
+		this.produtoDao = produtoDaoMock;
 	}
 	
 	public List<Produto> lista() {
