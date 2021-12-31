@@ -1,5 +1,6 @@
 package br.com.alura.alurator;
 
+import br.com.alura.alurator.conversor.ConvertXML;
 import br.com.alura.alurator.protocolo.Request;
 import br.com.alura.alurator.reflexao.ManipuladorClasse;
 import br.com.alura.alurator.reflexao.Reflexao;
@@ -29,6 +30,8 @@ public class Alurator {
                 .getMethod(nameMethod, params)
                 .comTratamentoDeExcecao(nameMethod, new Exception())
                 .InvokeMethod(instanciaController);
+
+        result = ConvertXML.convert(result);
 
         return result;
     }
