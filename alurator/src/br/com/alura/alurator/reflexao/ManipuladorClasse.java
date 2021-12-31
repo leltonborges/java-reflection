@@ -2,7 +2,6 @@ package br.com.alura.alurator.reflexao;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -45,7 +44,5 @@ public class ManipuladorClasse {
                 .orElseThrow(() -> new RuntimeException("Method not found!"));
 
         return new ManipulateMethods(nameMethod, selectedMethod, params);
-
     }
-
 }

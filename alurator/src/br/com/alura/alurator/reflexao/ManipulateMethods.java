@@ -3,7 +3,6 @@ package br.com.alura.alurator.reflexao;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -12,6 +11,7 @@ public class ManipulateMethods {
     private String nameMethod;
     private Method method;
     private Map<String, Object> params;
+    private Throwable ex;
 
     public ManipulateMethods(String nameMethod, Method method, Map<String, Object> params) {
         this.nameMethod = nameMethod;
@@ -35,4 +35,10 @@ public class ManipulateMethods {
         }
     }
 
+    public ManipulateMethods comTratamentoDeExcecao(String nameMethod, Throwable ex) {
+        System.err.println("Error method: " + nameMethod);
+        System.err.println("Message: " + ex.getMessage());
+        System.err.println("StackTrace: " + ex.getStackTrace());
+        return this;
+    }
 }
