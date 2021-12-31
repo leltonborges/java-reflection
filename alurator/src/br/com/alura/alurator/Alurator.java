@@ -28,7 +28,6 @@ public class Alurator {
 
         Object result = manipuladorClasse
                 .getMethod(nameMethod, params)
-                .comTratamentoDeExcecao(nameMethod, new Exception())
                 .InvokeMethod(instanciaController);
 
         result = ConvertXML.convert(result);
