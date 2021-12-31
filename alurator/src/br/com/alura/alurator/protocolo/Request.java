@@ -1,6 +1,5 @@
 package br.com.alura.alurator.protocolo;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 

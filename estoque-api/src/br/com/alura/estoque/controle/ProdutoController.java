@@ -3,14 +3,22 @@ package br.com.alura.estoque.controle;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.com.alura.estoque.dao.ProdutoDao;
 import br.com.alura.estoque.dao.ProdutoDaoMock;
 import br.com.alura.estoque.modelo.Produto;
 
 public class ProdutoController {
-	
-	private ProdutoDaoMock produtoDao;
 
-	public ProdutoController(ProdutoDaoMock produtoDaoMock) {
+	// Pesquisar depois como faz a comunicação com ContainerIoC
+//	private ProdutoDaoMock produtoDao;
+//
+//	public ProdutoController(ProdutoDaoMock produtoDaoMock) {
+//		this.produtoDao = produtoDaoMock;
+//	}
+
+	private ProdutoDao produtoDao;
+
+	public ProdutoController(ProdutoDao produtoDaoMock) {
 		this.produtoDao = produtoDaoMock;
 	}
 	

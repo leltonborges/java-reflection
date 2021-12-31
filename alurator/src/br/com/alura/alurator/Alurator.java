@@ -42,4 +42,8 @@ public class Alurator {
 
         return result;
     }
+
+    public void registra(Class<?> typeFont, Class<?> typeDistino) {
+        containerIoC.registrar(typeFont, typeDistino);
+    }
 }
